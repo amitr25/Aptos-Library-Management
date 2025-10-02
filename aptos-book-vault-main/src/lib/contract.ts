@@ -49,6 +49,10 @@ export class LibraryContract {
           function: `${MODULE_NAME}::init_library`,
           functionArguments: [],
         },
+        options: {
+          maxGasAmount: 100000,
+          gasUnitPrice: 100,
+        },
       });
 
       const committedTransaction = await aptos.signAndSubmitTransaction({
@@ -90,6 +94,10 @@ export class LibraryContract {
           function: `${MODULE_NAME}::add_book`,
           functionArguments: [title, author, category, description],
         },
+        options: {
+          maxGasAmount: 100000,
+          gasUnitPrice: 100,
+        },
       });
 
       const committedTransaction = await aptos.signAndSubmitTransaction({
@@ -119,28 +127,25 @@ export class LibraryContract {
 
       console.log(`📚 Borrowing book ${bookId} with Petra wallet...`);
 
-      // Create a real transaction on devnet using coin transfer
-      // We'll transfer a tiny amount (1 octas = 0.00000001 APT) to create a real transaction
-      const payload = {
-        type: "entry_function_payload",
+      // Create a transaction with proper structure for Petra wallet
+      const transaction = {
+        arguments: [walletAddress, "1"],
         function: "0x1::coin::transfer",
+        type: "entry_function_payload",
         type_arguments: ["0x1::aptos_coin::AptosCoin"],
-        arguments: [
-          walletAddress, // Transfer to self to create a transaction
-          DEMO_AMOUNT.toString() // Minimal amount for demo
-        ],
       };
 
-      console.log("Sending transaction payload:", payload);
+      console.log("Sending transaction:", transaction);
       
-      const response = await (window as any).aptos.signAndSubmitTransaction(payload);
-      console.log("Transaction submitted:", response);
+      // Use Petra wallet's signAndSubmitTransaction
+      const pendingTransaction = await (window as any).aptos.signAndSubmitTransaction(transaction);
+      console.log("Transaction submitted:", pendingTransaction);
       
       // Wait for transaction confirmation
-      await aptos.waitForTransaction({ transactionHash: response.hash });
-      console.log("Transaction confirmed:", response.hash);
+      await aptos.waitForTransaction({ transactionHash: pendingTransaction.hash });
+      console.log("Transaction confirmed:", pendingTransaction.hash);
       
-      return response.hash;
+      return pendingTransaction.hash;
     } catch (error) {
       console.error("Failed to borrow book via Petra wallet:", error);
       
@@ -169,6 +174,10 @@ export class LibraryContract {
         data: {
           function: `${MODULE_NAME}::borrow_book`,
           functionArguments: [bookId],
+        },
+        options: {
+          maxGasAmount: 100000,
+          gasUnitPrice: 100,
         },
       });
 
@@ -199,27 +208,25 @@ export class LibraryContract {
 
       console.log(`📤 Returning book ${bookId} with Petra wallet...`);
 
-      // Create a real transaction on devnet using coin transfer
-      const payload = {
-        type: "entry_function_payload",
+      // Create a transaction with proper structure for Petra wallet
+      const transaction = {
+        arguments: [walletAddress, "1"],
         function: "0x1::coin::transfer",
+        type: "entry_function_payload",
         type_arguments: ["0x1::aptos_coin::AptosCoin"],
-        arguments: [
-          walletAddress, // Transfer to self to create a transaction
-          DEMO_AMOUNT.toString() // Minimal amount for demo
-        ],
       };
 
-      console.log("Sending return transaction payload:", payload);
+      console.log("Sending return transaction:", transaction);
       
-      const response = await (window as any).aptos.signAndSubmitTransaction(payload);
-      console.log("Return transaction submitted:", response);
+      // Use Petra wallet's signAndSubmitTransaction
+      const pendingTransaction = await (window as any).aptos.signAndSubmitTransaction(transaction);
+      console.log("Return transaction submitted:", pendingTransaction);
       
       // Wait for transaction confirmation
-      await aptos.waitForTransaction({ transactionHash: response.hash });
-      console.log("Return transaction confirmed:", response.hash);
+      await aptos.waitForTransaction({ transactionHash: pendingTransaction.hash });
+      console.log("Return transaction confirmed:", pendingTransaction.hash);
       
-      return response.hash;
+      return pendingTransaction.hash;
     } catch (error) {
       console.error("Failed to return book via Petra wallet:", error);
       
@@ -248,6 +255,10 @@ export class LibraryContract {
         data: {
           function: `${MODULE_NAME}::return_book`,
           functionArguments: [bookId],
+        },
+        options: {
+          maxGasAmount: 100000,
+          gasUnitPrice: 100,
         },
       });
 
