@@ -1,8 +1,7 @@
-# 📚 Aptos Book Vault
+# 📚 Aptos-Library-Management
 
 <div align="center">
 
-![Aptos Book Vault](https://via.placeholder.com/800x400/1a1a2e/eee?text=Aptos+Book+Vault)
 
 **A Decentralized Library Management System on Aptos Blockchain**
 
@@ -303,7 +302,7 @@ contracts/
 
 ## 🤝 **Contributing**
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions!
 
 ### **Development Process**
 1. 🍴 Fork the repository
@@ -345,13 +344,9 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## 📄 **License**
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ---
 
 ## 🌐 **Links**
-
-- **🚀 Live Demo**: [http://localhost:8080](http://localhost:8080)
 - **📖 Aptos Docs**: [aptos.dev](https://aptos.dev)
 - **🔗 Petra Wallet**: [petra.app](https://petra.app)
 - **🌍 Aptos Explorer**: [explorer.aptoslabs.com](https://explorer.aptoslabs.com)
