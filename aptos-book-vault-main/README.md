@@ -1,8 +1,8 @@
-# 📚 Aptos Book Vault
+# 📚 Aptos-Library-Management
 
 <div align="center">
 
-![Aptos Book Vault](https://via.placeholder.com/800x400/1a1a2e/eee?text=Aptos+Book+Vault)
+
 
 **A Decentralized Library Management System on Aptos Blockchain**
 
